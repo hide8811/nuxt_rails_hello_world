@@ -1,8 +1,8 @@
 FROM node:12-alpine
 
-ARG WORKDIR \
-    CONTAINER_PORT \
-    API_URL
+ARG WORKDIR
+ARG CONTAINER_PORT
+ARG API_URL
 
 ENV HOME=/${WORKDIR} \
     LANG=C.UTF-8 \
@@ -10,15 +10,12 @@ ENV HOME=/${WORKDIR} \
     HOST=0.0.0.0 \
     API_URL=${API_URL}
 
-COPY package*.json ./
-
-RUN npm install --quiet
-
-COPY . .
-
-RUN npm run build
-
 WORKDIR ${HOME}
+
+RUN apk update && \
+    apk upgrade && \
+    npm install -g npm && \
+    npm install -g @vue/cli
 
 EXPOSE ${CONTAINER_PORT}
 

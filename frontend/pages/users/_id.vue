@@ -14,7 +14,7 @@ export default {
     };
   },
   created(params) {
-    axios.get(`http://localhost:3000/users/1`).then((res) => {
+    axios.get(`http://localhost:3000/users/3`).then((res) => {
       this.name = res.data.name;
     });
   },

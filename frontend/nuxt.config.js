@@ -39,7 +39,7 @@ export default {
     proxy: true
   },
   proxy: {
-    '/api/': { target: 'http://backend:3000', pathRewrite: { '^/api/': '/' } }
+    '/api/': { target: 'http://localhost:3000', pathRewrite: { '^/api/': '/' } }
   },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {

@@ -5,9 +5,17 @@
 <script>
 export default {
   asyncData({ $axios, params }) {
-    return $axios.$get(`http://backend:3000/users/${params.id}`).then((res) => {
-      return { name: res.name };
-    });
+    const response = $axios
+      .get(`http://localhost:3000/users${params.id}`)
+      .catch((err) => {
+        error({
+          statusCode: err.response.status,
+          message: err.response.data.message,
+        });
+        return err.response;
+      });
+    console.log(response);
+    return { name: response.name };
   },
 };
 </script>

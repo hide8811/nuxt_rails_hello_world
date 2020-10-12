@@ -1,21 +1,36 @@
 <template>
-  <h1>Hello, {{ name }}</h1>
+  <div>
+    <h1>Hello,{{ name }}</h1>
+    {{ $route.params.id }}
+  </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  asyncData({ $axios, params }) {
-    const response = $axios
-      .get(`http://localhost:3000/users${params.id}`)
-      .catch((err) => {
-        error({
-          statusCode: err.response.status,
-          message: err.response.data.message,
-        });
-        return err.response;
-      });
-    console.log(response);
-    return { name: response.name };
+  data() {
+    return {
+      name: "",
+    };
   },
+  created(params) {
+    axios.get(`http://localhost:3000/users/1`).then((res) => {
+      this.name = res.data.name;
+    });
+  },
+  // asyncData({ $axios, params }) {
+  //   const response = $axios
+  //     .get(`http://localhost:3000/users/${params.id}`)
+  //     .catch((err) => {
+  //       error({
+  //         statusCode: err.response.status,
+  //         message: err.response.data.message,
+  //       });
+  //       return err.response;
+  //     });
+
+  //   console.log(response.data);
+  //   // return { name: response.data };
+  // },
 };
 </script>

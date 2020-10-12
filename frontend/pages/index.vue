@@ -28,9 +28,11 @@
 <script>
 export default {
   asyncData({ $axios, params }) {
-    return $axios.$get(`http://backend:3000/users/${params.id}`).then((res) => {
-      return { name: res.name };
-    });
+    return $axios
+      .$get(`https://jsonplaceholder.typicode.com/users`)
+      .then((res) => {
+        return { name: res[0].name };
+      });
   },
 };
 </script>

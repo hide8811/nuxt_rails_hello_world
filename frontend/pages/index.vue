@@ -26,7 +26,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  asyncData({ $axios, params }) {
+    return $axios.$get(`http://backend:3000/users/${params.id}`).then((res) => {
+      return { name: res.name };
+    });
+  },
+};
 </script>
 
 <style>
